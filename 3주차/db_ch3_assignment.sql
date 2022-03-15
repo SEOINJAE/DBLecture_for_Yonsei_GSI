@@ -1,10 +1,15 @@
 SHOW DATABASES;
 
-CREATE DATABASE mybookstore;
+-- CREATE DATABASE mybookstore;
 
 USE mybookstore;
 
 SHOW TABLES;
+
+-- DROP TABLE Orders;
+-- DROP TABLE Book;
+-- DROP TABLE Customer;
+
 
 /* Book table 생성 */
 CREATE TABLE Book(
@@ -57,7 +62,7 @@ insert into book values (8, '야구를 부탁해', '이상미디어', 13000);
 insert into book values (9, '올림픽 이야기', '삼성당', 7500);
 insert into book values (10, 'Olympic Champions', 'Pearson', 13000);
 
-# 데이터 삽입 확인
+# Book table 데이터 삽입 확인
 SELECT *
 FROM book;
 
@@ -68,6 +73,7 @@ insert into customer values (3, '장미란', '대한민국 강원도', '000-7000
 insert into customer values (4, '추신수', '미국 클리블랜드', '000-8000-0001');
 insert into customer values (5, '박세리', '대한민국 대전', NULL);
 
+# Customer table 데이터 삽입 확인
 SELECT *
 FROM customer;
 
@@ -77,15 +83,17 @@ FROM customer;
  즉, orders 의 foreign key 인 bookid, custid 의 값이 book, customer 테이블에 이미 존재해야 오류가 발생하지 않았습니다.
 */
 
--- insert into orders values (1, 1, 1, 6000, '2013-07-01');
--- insert into orders values (2, 1, 3, 21000, '2013-07-03');
--- insert into orders values (3, 2, 5, 8000, '2013-07-03');
--- insert into orders values (4, 3, 6, 6000, '2013-07-04);
--- insert into orders values (5, 4, 7, 20000, '2013-07-05');
--- insert into orders values (6, 1, 2, 12000, '2013-07-07');
--- insert into orders values (7, 4, 8, 13000, '2013-07-07');
--- insert into orders values (8, 3, 10, 12000, '2013-07-08');
--- insert into orders values (9, 2, 10, 7000, '2013-07-09');
--- insert into orders values (10, 3, 8, 13000, '2013-07-10');
+insert into orders values (1, 1, 1, 6000, '2013-07-01');
+insert into orders values (2, 1, 3, 21000, '2013-07-03');
+insert into orders values (3, 2, 5, 8000, '2013-07-03');
+insert into orders values (4, 3, 6, 6000, '2013-07-04');
+insert into orders values (5, 4, 7, 20000, '2013-07-05');
+insert into orders values (6, 1, 2, 12000, '2013-07-07');
+insert into orders values (7, 4, 8, 13000, '2013-07-07');
+insert into orders values (8, 3, 10, 12000, '2013-07-08');
+insert into orders values (9, 2, 10, 7000, '2013-07-09');
+insert into orders values (10, 3, 8, 13000, '2013-07-10');
 
-김대경거 참고
+# Orders 테이블 데이터 삽입 확인
+SELECT *
+FROM Orders;
