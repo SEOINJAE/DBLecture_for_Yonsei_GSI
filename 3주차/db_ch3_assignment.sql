@@ -1,15 +1,17 @@
-SHOW DATABASES;
+SHOW DATABASES; -- 서버에 존재하는 데이터 베이스 확인
 
--- CREATE DATABASE mybookstore;
+CREATE DATABASE mybookstore; -- 데이터 베이스 생성
 
-USE mybookstore;
+USE mybookstore; -- 데이터 베이스 사용
 
-SHOW TABLES;
+SHOW TABLES; -- 데이터 베이스내에 존재하는 테이블 확인
 
+# 테이블 삭제 명령어
 -- DROP TABLE Orders;
 -- DROP TABLE Book;
 -- DROP TABLE Customer;
 
+-----------------------------------------------------------------
 
 /* Book table 생성 */
 CREATE TABLE Book(
@@ -49,6 +51,8 @@ SHOW TABLES;
 # 테이블 출력
 SELECT *
 FROM Orders;
+
+-----------------------------------------------------------------
 
 # book 테이블 데이터 삽입
 insert into book values (1, '축구의  역사', '굿스포츠', 7000);
@@ -97,3 +101,30 @@ insert into orders values (10, 3, 8, 13000, '2013-07-10');
 # Orders 테이블 데이터 삽입 확인
 SELECT *
 FROM Orders;
+
+
+-----------------------------------------------------------------
+
+SHOW TABLES;
+
+# 실습 1) 모든 도서의 이름과 가격을 검색하시오.
+SELECT bookname, price
+FROM Book;
+
+# 실습 2) 모든 도서의 도서번호, 도서이름, 출판사, 가격을 검색하시오
+SELECT *
+FROM Book;
+
+# 실습 3) 도서 테이블에 있는 모든 출판사를 검색하시오
+SELECT DISTINCT publisher
+FROM Book;
+
+# 실습 4) 가격이 20,000원 미만인 도서를 검색하시오
+SELECT bookname
+FROM Book
+WHERE price <= 20000;
+
+# 실습 5) 가격이 10,000원 이상 20,000 이하인 도서를 검색하시오
+SELECT bookname 
+FROM Book
+WHERE price >= 10000 and price <= 20000;
