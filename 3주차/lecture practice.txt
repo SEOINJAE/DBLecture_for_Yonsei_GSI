@@ -1,0 +1,43 @@
+SHOW DATABASES;
+
+CREATE DATABASE mydb;
+DROP DATABASE mydb;
+
+USE mydb;
+
+SHOW TABLES;
+
+CREATE TABLE department (
+    dept_name VARCHAR(20),
+    building VARCHAR(15),
+    budget NUMERIC(12 , 2 ),
+    PRIMARY KEY (dept_name)
+);
+
+DESC department;
+
+SELECT *
+FROM department;
+
+CREATE TABLE instructor (
+    ID CHAR(5),
+    name VARCHAR(20) NOT NULL,
+    dept_name VARCHAR(20),
+    salary NUMERIC(8 , 2 ),
+    PRIMARY KEY (ID),
+    FOREIGN KEY (dept_name)
+        REFERENCES department (dept_name)
+);
+
+DESC instructor;
+
+SELECT *
+FROM instructor;
+
+INSERT INTO department VALUES ('Comp. Sci.', 'Taylor', 100000);
+INSERT INTO department (dept_name, building, budget) VALUES ('Physics','Watson', 70000), ('math','jobs', '1000');
+
+SELECT budget, dept_name
+FROM department
+WHERE budget >= 70000;
+;

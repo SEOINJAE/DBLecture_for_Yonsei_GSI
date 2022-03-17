@@ -34,16 +34,16 @@ SELECT *
 FROM instructor;
 
 /* department table 데이터 삽입 */
-insert into department values('Comp. Sci.', 'Taylor', 100000);
-insert into department values('Physics', 'Watson', 70000);
+INSERT INTO department VALUES('Comp. Sci.', 'Taylor', 100000);
+INSERT INTO department VALUES('Physics', 'Watson', 70000);
 
 /* department table 데이터 삽입 결과 확인 */
 SELECT *
 FROM department;
 
 /* instructor table 데이터 삽입 */
-insert into instructor values ('10101', 'Srinivasan','Comp. Sci.', '65000');
-insert into instructor values ('22222', 'Einstein', 'Physics', '95000');
+INSERT INTO instructor VALUES ('10101', 'Srinivasan','Comp. Sci.', '65000');
+INSERT INTO instructor VALUES ('22222', 'Einstein', 'Physics', '95000');
 
 /* instructor 테이블 데이터 삽입 결과 확인 */
 SELECT *
