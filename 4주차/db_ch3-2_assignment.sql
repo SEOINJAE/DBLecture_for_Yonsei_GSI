@@ -14,8 +14,6 @@ SELECT *
 FROM Book;
 
 # 6) 고객과 고객의 주문에 관한 데이터를 모두 보이시오.
-
-
 --  Nature join
 SELECT *
 FROM Customer, Orders
@@ -124,12 +122,33 @@ ORDER BY price DESC
 	, publisher ASC
 ;
 
-# 16) 고객이 주문한 도서의 총 판매액을 구하시오.
+
+
+# 16) '이상미디어' 출판사 혹은 '대한미디어' 출판사에서 출판한 책의 제목과 가격을 검색하시오.
+# (단, 반드시 set opertion을 사용하시오)
+
+(SELECT bookname
+	, price
+    , publisher
+FROM book
+WHERE publisher LIKE '이상미디어')
+
+UNION
+
+(SELECT bookname
+	, price
+	, publisher
+FROM book
+WHERE publisher = '대한미디어')
+;
+
+
+# 17) 고객이 주문한 도서의 총 판매액을 구하시오.
 SELECT SUM(saleprice) as 총매출
 FROM Orders
 ;
 
-# 17) 2번 김연아 고객이 주문한 도서의 총 판매액을 구하시오.
+# 18) 2번 김연아 고객이 주문한 도서의 총 판매액을 구하시오.
 SELECT SUM(saleprice) as 총매출
 FROM Orders
 WHERE custid = 2
@@ -141,7 +160,7 @@ FROM Orders as a
 WHERE name = '김연아'
 ;
 
-# 18) 고객이 주문한 도서의 총 판매액, 평균값, 최저가, 최고가를 구하시오.
+# 19) 고객이 주문한 도서의 총 판매액, 평균값, 최저가, 최고가를 구하시오.
 SELECT SUM(saleprice) as Total
 	, AVG(saleprice) as Average
     , MIN(saleprice) as Minimum
@@ -149,12 +168,12 @@ SELECT SUM(saleprice) as Total
 FROM Orders
 ;
 
-# 19) 마당서점의 도서 판매 건수를 구하시오.
+# 20) 마당서점의 도서 판매 건수를 구하시오.
 SELECT Count(*) as "판매 건수"
 FROM Orders
 ;
 
-# 20) 고개별로 주문한 도서의 총 수량과 총 판매액을 구하시오.
+# 21) 고개별로 주문한 도서의 총 수량과 총 판매액을 구하시오.
 SELECT custid 
 	, COUNT(custid) as "도서수량"
 	, SUM(saleprice) as "총액"
@@ -162,7 +181,7 @@ FROM Orders
 GROUP BY custid 
 ;
 
-# 21) 가격이 8,000원 이상인 도서를 구매한 고객에 대하여 고객별 주문 도서의 총 수량을 구하시고.
+# 22) 가격이 8,000원 이상인 도서를 구매한 고객에 대하여 고객별 주문 도서의 총 수량을 구하시고.
 # 단, 2권이상 구매한 고객만 구한다.
 SELECT custid
 	, count(saleprice) as "도서수량"
@@ -170,4 +189,11 @@ FROM Orders
 WHERE saleprice >= 8000
 GROUP BY custid
 HAVING count(custid) >= 2
+;
+
+# 23) 가장 비싼 도서의 이름과 가격을 구하시오.
+SELECT bookname
+	, price
+FROM Book
+WHERE price = (SELECT MAX(price) FROM book)
 ;
