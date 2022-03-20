@@ -1,0 +1,173 @@
+SHOW DATABASES;
+
+USE mybookstore;
+
+SHOW TABLES;
+
+SELECT *
+FROM Customer;
+
+SELECT *
+FROM Orders;
+
+SELECT *
+FROM Book;
+
+# 6) 고객과 고객의 주문에 관한 데이터를 모두 보이시오.
+
+
+--  Nature join
+SELECT *
+FROM Customer, Orders
+WHERE Customer.custid = Orders.custid;
+
+SELECT *
+FROM Customer NATURAL JOIN Orders;
+
+-- LEFT JOIN
+SELECT *
+FROM Customer as a
+    LEFT JOIN Orders as b on a.custid = b.custid;
+
+-- INNER JOIN
+SELECT *
+FROM Customer as a
+    INNER JOIN Orders as b on a.custid = b.custid;
+    
+# 7) 고객의 이름과 고객이 주문한 도서의 가격을 검색하시오.
+SELECT a.name
+	, b.saleprice
+FROM Customer as a
+    INNER JOIN Orders as b on a.custid = b.custid;
+    
+# 8) 고객의 이름과 고객이 주문한 도서의 이름을 구하시오.
+SELECT a.name
+	, c.bookname
+FROM Customer as a
+    INNER JOIN Orders as b on a.custid = b.custid
+    INNER JOIN Book as c on b.bookid = c.bookid
+;
+
+SELECT name, bookname
+FROM Customer, Orders, Book
+WHERE Customer.custid = Orders.custid
+AND Orders.bookid = Book.bookid
+;
+
+SELECT a.name
+     , c.bookname
+FROM Customer as a
+    , Orders as b
+    , Book as c
+WHERE a.custid = b.custid
+AND b.bookid = c.bookid
+AND saleprice = 20000
+;
+
+# 9) 가격이 20,000원인 도서를 주문한 고객의 이름과 도서의 이름을 구하시오.
+SELECT a.name
+    , c.bookname
+FROM Customer as a
+    INNER JOIN Orders as b on a.custid = b.custid
+    INNER JOIN Book as c on b.bookid = c.bookid
+WHERE saleprice = 20000
+;
+
+SELECT a.name
+    , c.bookname
+FROM Customer as a
+    , Orders as b
+    , Book as c
+WHERE a.custid = b.custid
+AND b.bookid = c.bookid
+AND saleprice = 20000
+;
+
+# 10) 고객과 고객의 주문에 관한 데이터를 고객별로 정렬하여 보이시오.
+SELECT *
+FROM Customer as a
+    INNER JOIN Orders as b on a.custid = b.custid
+ORDER BY a.custid
+;
+
+# 11) 도서이름에 '축구'가 포함된 출판사를 검색하시오.
+SELECT bookname
+     , publisher
+FROM Book
+WHERE bookname LIKE '%축구%'
+;
+
+# 12) 도서이름 왼쪽 두 번째 위치에 '구'라는 문자열을 갖는 도서를 모두 검색하시오.
+SELECT *
+FROM Book
+WHERE bookname LIKE '_구%'
+;
+
+# 13) 출판사가 '굿스포츠'혹은 '대한미디어'인 도서를 검색하시오.
+SELECT *
+FROM Book
+WHERE 1=1
+AND publisher = '굿스포츠' or publisher = '대한미디어'
+-- AND publisher LIKE '굿스포츠' or publisher LIKE '대한미디어' 
+;
+
+# 14) 도서를 이름순으로 검색하시오.
+SELECT *
+FROM Book
+ORDER BY bookname
+;
+
+# 15) 도서를 가격의 내림차순으로 검색하시오. 만약 가격이 같다면 출판사의 오름차순으로 검색한다.
+SELECT *
+FROM Book
+ORDER BY price DESC
+	, publisher ASC
+;
+
+# 16) 고객이 주문한 도서의 총 판매액을 구하시오.
+SELECT SUM(saleprice) as 총매출
+FROM Orders
+;
+
+# 17) 2번 김연아 고객이 주문한 도서의 총 판매액을 구하시오.
+SELECT SUM(saleprice) as 총매출
+FROM Orders
+WHERE custid = 2
+;
+
+SELECT SUM(saleprice) as 총매출
+FROM Orders as a
+    LEFT JOIN Customer as b ON a.custid = b.custid
+WHERE name = '김연아'
+;
+
+# 18) 고객이 주문한 도서의 총 판매액, 평균값, 최저가, 최고가를 구하시오.
+SELECT SUM(saleprice) as Total
+    , AVG(saleprice) as Average
+    , MIN(saleprice) as Minimum
+    , MAX(saleprice) as Maximum
+FROM Orders
+;
+
+# 19) 마당서점의 도서 판매 건수를 구하시오.
+SELECT Count(*) as "판매 건수"
+FROM Orders
+;
+
+# 20) 고개별로 주문한 도서의 총 수량과 총 판매액을 구하시오.
+SELECT custid 
+     , COUNT(custid) as "도서수량"
+     , SUM(saleprice) as "총액"
+FROM Orders
+GROUP BY custid 
+;
+
+# 21) 가격이 8,000원 이상인 도서를 구매한 고객에 대하여 고객별 주문 도서의 총 수량을 구하시고.
+# 단, 2권이상 구매한 고객만 구한다.
+SELECT custid
+     , count(saleprice) as "도서수량"
+FROM Orders
+WHERE saleprice >= 8000
+GROUP BY custid
+HAVING count(custid) >= 2
+;
