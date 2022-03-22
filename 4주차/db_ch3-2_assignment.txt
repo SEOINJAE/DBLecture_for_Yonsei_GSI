@@ -52,15 +52,6 @@ WHERE Customer.custid = Orders.custid
 AND Orders.bookid = Book.bookid
 ;
 
-SELECT  a.name
-    , c.bookname
-FROM Customer as a
-    , Orders as b
-    , Book as c
-WHERE a.custid = b.custid
-AND b.bookid = c.bookid
-AND saleprice = 20000
-;
 
 # 9) 가격이 20,000원인 도서를 주문한 고객의 이름과 도서의 이름을 구하시오.
 SELECT a.name
