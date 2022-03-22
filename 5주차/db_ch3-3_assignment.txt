@@ -64,7 +64,16 @@ HAVING count(custid) >= 2
 
 # 23) 가장 비싼 도서의 이름과 가격을 구하시오.
 SELECT bookname
-    , price
+	, price
 FROM Book
-WHERE price = (SELECT MAX(price) FROM book)
+ORDER BY price DESC
+LIMIT 1
+;
+
+
+SELECT bookname
+	, price
+FROM Book
+WHERE price = (SELECT MAX(price)
+				FROM book)
 ;

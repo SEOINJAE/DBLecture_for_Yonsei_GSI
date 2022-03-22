@@ -65,5 +65,15 @@ HAVING count(custid) >= 2
 SELECT bookname
 	, price
 FROM Book
-WHERE price = (SELECT MAX(price) FROM book)
+ORDER BY price DESC
+LIMIT 1
 ;
+
+
+SELECT bookname
+	, price
+FROM Book
+WHERE price = (SELECT MAX(price)
+				FROM book)
+;
+
