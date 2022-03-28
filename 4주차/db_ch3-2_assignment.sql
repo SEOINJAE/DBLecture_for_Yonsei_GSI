@@ -70,6 +70,7 @@ AND b.bookid = c.bookid
 AND saleprice = 20000
 ;
 
+
 SELECT a.name
 	, c.bookname
 FROM Customer as a
