@@ -22,45 +22,44 @@ WHERE Customer.custid = Orders.custid;
 SELECT *
 FROM Customer NATURAL JOIN Orders;
 
+-- INNER JOIN
+SELECT *
+FROM Customer as a
+	INNER JOIN Orders as b on a.custid = b.custid;
+
 -- LEFT JOIN
 SELECT *
 FROM Customer as a
 	LEFT JOIN Orders as b on a.custid = b.custid;
 
--- INNER JOIN
-SELECT *
-FROM Customer as a
-	INNER JOIN Orders as b on a.custid = b.custid;
     
 # 7) 고객의 이름과 고객이 주문한 도서의 가격을 검색하시오.
+SELECT name, saleprice
+FROM Customer, Orders
+WHERE Customer.custid = Orders.custid;
+
+
 SELECT a.name
 	, b.saleprice
 FROM Customer as a
 	INNER JOIN Orders as b on a.custid = b.custid;
     
 # 8) 고객의 이름과 고객이 주문한 도서의 이름을 구하시오.
-SELECT a.name
-	, c.bookname
-FROM Customer as a
-    INNER JOIN Orders as b on a.custid = b.custid
-	INNER JOIN Book as c on b.bookid = c.bookid
-;
-
 SELECT name, bookname
 FROM Customer, Orders, Book
 WHERE Customer.custid = Orders.custid
 AND Orders.bookid = Book.bookid
 ;
 
-# 9) 가격이 20,000원인 도서를 주문한 고객의 이름과 도서의 이름을 구하시오.
 SELECT a.name
 	, c.bookname
 FROM Customer as a
     INNER JOIN Orders as b on a.custid = b.custid
 	INNER JOIN Book as c on b.bookid = c.bookid
-WHERE saleprice = 20000
 ;
 
+
+# 9) 가격이 20,000원인 도서를 주문한 고객의 이름과 도서의 이름을 구하시오.
 SELECT a.name
 	, c.bookname
 FROM Customer as a
@@ -71,7 +70,22 @@ AND b.bookid = c.bookid
 AND saleprice = 20000
 ;
 
+SELECT a.name
+	, c.bookname
+FROM Customer as a
+    INNER JOIN Orders as b on a.custid = b.custid
+	INNER JOIN Book as c on b.bookid = c.bookid
+WHERE saleprice = 20000
+;
+
 # 10) 고객과 고객의 주문에 관한 데이터를 고객별로 정렬하여 보이시오.
+SELECT *
+FROM Customer, Orders
+WHERE Customer.custid = Orders.custid
+ORDER BY Customer.custid
+;
+
+
 SELECT *
 FROM Customer as a
 	INNER JOIN Orders as b on a.custid = b.custid
