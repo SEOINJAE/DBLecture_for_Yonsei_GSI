@@ -22,7 +22,7 @@ LIMIT 1
 
 /* 25) 도서를 구매한 적이 있는 고객의 이름을 검색하시오. */
 SELECT name
-FROM Customer as a
+FROM Customer
 WHERE custid IN (SELECT DISTINCT custid
 				 FROM Orders)
 ;
