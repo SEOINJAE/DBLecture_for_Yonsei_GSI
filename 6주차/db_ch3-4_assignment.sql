@@ -38,7 +38,7 @@ FROM(
 	FROM book
 	GROUP BY publisher
 ) a
-WHERE price > avg_price 
+-- WHERE price > avg_price 
 ;
 
 

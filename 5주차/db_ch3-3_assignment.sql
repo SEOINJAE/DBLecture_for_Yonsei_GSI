@@ -24,11 +24,20 @@ FROM Orders
 WHERE custid = 2
 ;
 
+SELECT sum(saleprice) as 총매출
+FROM Orders as a
+	,Customer as b
+WHERE a.custid = b.custid 
+AND name = '김연아'
+;
+
 SELECT SUM(saleprice) as 총매출
 FROM Orders as a
 	LEFT JOIN Customer as b ON a.custid = b.custid
 WHERE name = '김연아'
 ;
+
+
 
 # 19) 고객이 주문한 도서의 총 판매액, 평균값, 최저가, 최고가를 구하시오.
 SELECT SUM(saleprice) as Total
