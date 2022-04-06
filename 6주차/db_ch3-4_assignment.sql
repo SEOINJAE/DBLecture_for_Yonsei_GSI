@@ -75,7 +75,7 @@ SELECT name
 	, address
 FROM customer as a
 WHERE 1=1
-AND EXISTS (SELECT custid
+AND EXISTS (SELECT 1
 			FROM orders as b
 			WHERE a.custid = b.custid)
 ;
