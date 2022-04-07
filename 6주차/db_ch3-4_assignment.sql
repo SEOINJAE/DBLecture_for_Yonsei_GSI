@@ -28,27 +28,22 @@ WHERE custid IN (SELECT DISTINCT custid
 ;
 
 
-/* 26) 출판사별로 출판사의 평균 도서 가격보다 비싼 도서를 구하시오.
+/* 26) 평균 도서 가격이 10,000원 이상인 출판사를 보이시오.
 (반드시, Derived Relation 사용) */
-
-SELECT *
+SELECT publisher
 FROM(
 	SELECT publisher
 		, AVG(price) as avg_price
 	FROM book
-	GROUP BY publisher
+	Group by publisher
 ) a
--- WHERE price > avg_price 
+WHERE avg_price >= 10000
 ;
 
 
-select publisher, price, avg(price)
-from book
-group by publisher, price
-;
-
-select *
-from book
+SELECT publisher, AVG(price)
+FROM book
+GROUP BY publisher
 ;
 
 
@@ -99,10 +94,22 @@ WHERE custid = 5
 
 
 /* 31) Customer 테이블에서 박세리의 고객의 주소를 김연아 고객의 주소로 변경하시오. */
+UPDATE customer
+SET address = (SELECT address
+				FROM customer
+                WHERE name = '김연아')
+WHERE name = '박세리'
+
+/* 32) Customer 테이블에서 고객번호가 5인 고객을 삭제하시오. */
 -- DELETE FROM customer
 -- WHERE custid = 5
 ;
 
+SELECT *
+FROM customer
+; 
+
+/* 33) 모든 고객을 삭제하시오.*/
 -- DELETE FROM customer;
 
 
