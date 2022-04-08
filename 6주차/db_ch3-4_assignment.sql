@@ -96,7 +96,7 @@ WHERE custid = 5
 
 
 /* 31) Customer 테이블에서 박세리의 고객의 주소를 김연아 고객의 주소로 변경하시오. */
-set sql_safe_updates=0; # 일시적으로 세이프 모드 해제
+set sql_safe_updates=0; # Error Code: 1175 일시적으로 세이프 모드 해제
 
 UPDATE Customer as a
 SET a.address = (SELECT b.address
