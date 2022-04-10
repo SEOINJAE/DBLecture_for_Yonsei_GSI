@@ -53,8 +53,6 @@ FROM vw_info_customer;
 
 /* 실습: 서점 데이터(Cascading Actions) */
 # Orders 테이블에 수정/삭제에 대한 cascade 옵션을 추가하시오.
-
-
 alter table Orders 
 add constraint orders_ibfk_customer
 foreign key(custid) references Customer (custid)
