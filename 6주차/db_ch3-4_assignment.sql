@@ -128,9 +128,9 @@ DELETE FROM customer;
 #-----------------------------------------------------------------------------
 /* 삭제한 테이블을 다시 생성해서 테스트할 경우 활용 */
 # 테이블 삭제 명령어
--- DROP TABLE Orders;
--- DROP TABLE Book;
--- DROP TABLE Customer;
+DROP TABLE Orders;
+DROP TABLE Book;
+DROP TABLE Customer;
 
 # 테이블 다시생성
 /* Book table 생성 */

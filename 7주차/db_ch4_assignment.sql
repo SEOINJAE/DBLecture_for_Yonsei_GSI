@@ -31,7 +31,60 @@ FROM orders as a
 	INNER JOIN book as c on a.bookid = c.bookid
 ;
 
-SELECT * 
+
+SELECT bookid
+	, bookname
+    , saleprice
 FROM vw_info_customer
+WHERE name = '김연아'
 ;
 
+/* 4) 앞서 생성한 뷰 vw_Customer를 삭제하여라. */
+DROP VIEW vw_Customer;
+DROP VIEW vw_info_customer;
+
+# 삭제 확인
+SELECT *
+FROM vw_customer;
+
+SELECT *
+FROM vw_info_customer;
+
+
+/* 실습: 서점 데이터(Cascading Actions) */
+# Orders 테이블에 수정/삭제에 대한 cascade 옵션을 추가하시오.
+
+
+alter table Orders 
+add constraint orders_ibfk_customer
+foreign key(custid) references Customer (custid)
+on delete cascade
+on update cascade;
+
+
+alter table Orders 
+add constraint orders_ibfk_book
+foreign key(bookid) references Book (bookid) 
+on delete cascade
+on update cascade;
+
+-- alter table Orders drop foreign key orders_ibfk_1;
+-- alter table Orders drop foreign key orders_ibfk_2;
+
+select * from information_schema.table_constraints;
+
+
+DELETE
+FROM Customer 
+WHERE name = '박지성'
+;
+
+UPDATE Customer
+SET custid = '12'
+WHERE name = '김연아'
+;
+
+DELETE
+FROM book
+WHERE publisher = '굿스포츠'
+;
