@@ -1,5 +1,7 @@
 USE mybookstore;
 
+SHOW TABLES;
+
 /* 1) 도서를 구매하지 않은 고객을 포함하여 고객의 이름과 고객이 주문한 도서의 가격을 구하시오. */
 SELECT name
 	, saleprice
@@ -31,7 +33,6 @@ FROM orders as a
 	INNER JOIN book as c on a.bookid = c.bookid
 ;
 
-
 SELECT bookid
 	, bookname
     , saleprice
@@ -53,36 +54,58 @@ FROM vw_info_customer;
 
 /* 실습: 서점 데이터(Cascading Actions) */
 # Orders 테이블에 수정/삭제에 대한 cascade 옵션을 추가하시오.
-alter table Orders 
-add constraint orders_ibfk_customer
-foreign key(custid) references Customer (custid)
-on delete cascade
-on update cascade;
+set sql_safe_updates=0; # Error Code: 1175 일시적으로 세이프 모드 해제
+
+/* 제약조건 검색 쿼리 */
+SELECT * 
+FROM information_schema.table_constraints
+WHERE TABLE_NAME = 'orders';
+
+/* customer 테이블 CASCADE 옵션 추가 */
+ALTER TABLE Orders 
+ADD CONSTRAINT orders_ibfk_customer
+FOREIGN KEY(custid) REFERENCES Customer (custid)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+;
+
+/* orders 테이블 CASCADE 옵션 추가 */
+ALTER TABLE Orders 
+ADD CONSTRAINT orders_ibfk_book
+FOREIGN KEY(bookid) REFERENCES Book (bookid) 
+ON DELETE CASCADE
+ON UPDATE CASCADE
+;
 
 
-alter table Orders 
-add constraint orders_ibfk_book
-foreign key(bookid) references Book (bookid) 
-on delete cascade
-on update cascade;
+/* 제약조건 생성 결과 확인 */
+SELECT * 
+FROM information_schema.table_constraints
+WHERE TABLE_NAME = 'orders';
 
--- alter table Orders drop foreign key orders_ibfk_1;
--- alter table Orders drop foreign key orders_ibfk_2;
+/* 기존 제약 조건 삭제 */
+ALTER TABLE Orders DROP FOREIGN KEY orders_ibfk_1;
+ALTER TABLE Orders DROP FOREIGN KEY orders_ibfk_2;
 
-select * from information_schema.table_constraints;
-
-
+# Customer 테이블에서 ‘박지성’ 고객을 삭제
 DELETE
 FROM Customer 
 WHERE name = '박지성'
 ;
 
+# Customer 테이블에서 ‘김연아’ 고객의 custid를 12로 변경
 UPDATE Customer
 SET custid = '12'
 WHERE name = '김연아'
 ;
 
+SELECT * FROM customer;
+
+# Book 테이블에서 ‘굿스포츠’에서 출판한 모든 책을 삭제
 DELETE
 FROM book
 WHERE publisher = '굿스포츠'
 ;
+
+SELECT * FROM book;
+
