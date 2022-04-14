@@ -7,8 +7,8 @@ SHOW TABLES;
 # ON DELETE CASCADE 옵션 실습
 
 /* 테이블 삭제 */
-DROP TABLE instructor;
-DROP TABLE department;
+-- DROP TABLE instructor;
+-- DROP TABLE department;
 
 /* Department 테이블 먼저 생성 (참조가 될 테이블) */
 create table department (
