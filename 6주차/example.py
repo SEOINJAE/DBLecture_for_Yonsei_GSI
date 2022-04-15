@@ -8,7 +8,7 @@ result = []
 index = 0
 for i in publisher:
     index += 1
-    print(index,"번째 메인쿼리 입력 :",i)
+    print(index,"번째 행의 메인쿼리 입력 :",i)
     print()
 
     for key, value in nest.items():
@@ -16,7 +16,7 @@ for i in publisher:
         if key == i:
             result.append(value)
     print()
-    # break
+    break
 
 # print(result)
 
