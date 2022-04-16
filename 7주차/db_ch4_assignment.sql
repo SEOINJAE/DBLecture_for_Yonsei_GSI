@@ -77,7 +77,6 @@ ON DELETE CASCADE
 ON UPDATE CASCADE
 ;
 
-
 /* 제약조건 생성 결과 확인 */
 SELECT * 
 FROM information_schema.table_constraints
