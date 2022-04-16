@@ -19,7 +19,6 @@ for i in main:
         if key == i:
             result.append(value)
     print()
-    break
 
 # print(result)
 
