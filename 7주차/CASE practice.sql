@@ -52,4 +52,13 @@ FROM orders as a
 GROUP BY resident
 ;
 
+SELECT CASE WHEN b.address LIKE '%대한민국%' THEN '내국인' ELSE '외국인'
+		END AS resident
+	  , SUM(saleprice) AS '총 판매액'
+      , ROUND(AVG(saleprice)) AS '평균 판매액'
+FROM orders AS a
+	LEFT JOIN customer AS b on a.custid = b.custid
+GROUP BY resident;
+
+
 
