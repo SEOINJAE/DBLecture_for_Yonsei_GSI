@@ -33,6 +33,11 @@ FROM orders as a
 	INNER JOIN book as c on a.bookid = c.bookid
 ;
 
+DESC vw_info_customer;
+
+SELECT *
+FROM vw_info_customer;
+
 SELECT bookid
 	, bookname
     , saleprice
@@ -51,6 +56,7 @@ FROM vw_customer;
 SELECT *
 FROM vw_info_customer;
 
+#----------------------------------------------------------------------
 
 /* 실습: 서점 데이터(Cascading Actions) */
 # Orders 테이블에 수정/삭제에 대한 cascade 옵션을 추가하시오.
