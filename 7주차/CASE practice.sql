@@ -2,15 +2,10 @@ SHOW DATABASES;
 
 USE mybookstore;
 
-SELECT *
-FROM orders
-;
-
-SELECT *
-FROM customer;
-
-SELECT *
-FROM book;
+/* 테이블 확인 */
+SELECT * FROM orders;
+SELECT * FROM customer;
+SELECT * FROM book;
 
 /* 조건을 활용한 형식 */
 SELECT publisher 
@@ -19,8 +14,10 @@ SELECT publisher
 		 WHEN publisher = '대한미디어' THEN '3'
 		 WHEN publisher = '이상미디어' THEN '4'
 		 WHEN publisher = '삼성당' THEN '5' ELSE '6'
-	 END as '출판사 번호'
-FROM book;  
+	 END as 'publisher_no'
+FROM book
+ORDER BY publisher_no ASC
+;  
 
 
 
