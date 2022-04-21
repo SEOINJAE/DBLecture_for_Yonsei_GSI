@@ -35,12 +35,11 @@ DESC vw_info_customer;
 SELECT *
 FROM vw_info_customer;
 
-SELECT bookid
+SELECT orderid
 	, bookname
     , saleprice
 FROM vw_info_customer
 WHERE name = '김연아';
-
 
 /* 4) 앞서 생성한 뷰 vw_Customer를 삭제하여라. */
 DROP VIEW vw_Customer;
@@ -93,6 +92,10 @@ DELETE
 FROM Customer 
 WHERE name = '박지성';
 
+SELECT * FROM customer;
+SELECT * FROM orders;
+SELECT * FROM book;
+
 
 # Customer 테이블에서 ‘김연아’ 고객의 custid를 12로 변경
 UPDATE Customer
@@ -106,5 +109,6 @@ DELETE
 FROM book
 WHERE publisher = '굿스포츠';
 
+SELECT * FROM customer;
 SELECT * FROM book;
-
+SELECT * FROM orders;
