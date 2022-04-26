@@ -38,3 +38,36 @@ FROM orders AS a
 	LEFT JOIN book AS B ON a.bookid = b.bookid;
 
 
+/*CREATE SELECT */
+CREATE TABLE cum_price AS
+SELECT orderid 
+	, publisher
+    , saleprice
+    , SUM(saleprice) OVER (PARTITION BY publisher ORDER BY orderid) AS cum_sum 
+FROM orders AS a
+	LEFT JOIN book AS B ON a.bookid = b.bookid;
+
+DESC cum_price;
+
+SELECT *
+FROM cum_price;
+
+DROP TABLE cum_price;
+
+
+/* INSERT SELECT */
+INSERT INTO customer (custid, name, address)
+SELECT
+	(SELECT '6' FROM dual) AS custid
+	,name
+    ,address
+FROM customer
+WHERE custid = 3;
+
+SELECT *
+FROM customer;
+
+
+
+
+
