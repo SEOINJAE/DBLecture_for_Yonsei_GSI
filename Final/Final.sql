@@ -169,10 +169,21 @@ from
 ) as c
 where movie_cnt >=2;
 
+
 #(j) 번
 select Name
 	, Gender
 	, case when gender = 'M' then '0' ELSE '1' END AS gender_no
 from star;
 
+
 #(k)
+select title
+	, year
+	, DENSE_RANK() OVER (ORDER BY year) AS released_rank
+from movie
+;
+
+
+
+
