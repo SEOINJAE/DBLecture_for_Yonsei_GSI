@@ -122,6 +122,7 @@ where Age is null;
 
 # (e)번
 select distinct b.Name
+	, b.age
 from StarsIn as a
 	inner join Star as b on a.Star_Name = b.Name
 where a.Movie_Title = 'Star Wars'
