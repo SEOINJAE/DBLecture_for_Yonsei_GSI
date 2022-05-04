@@ -136,7 +136,6 @@ group by Studio_Name;
 
 
 # (g)번
-
 select Name
 	, Address
 	, Phone
@@ -150,10 +149,9 @@ from Studio;
 select b.Name
     , sum(a.length) as total_length
 from Movie as a
-	inner join Producer as b on  a.Producer_Num = b.Num
+	inner join Producer as b on a.Producer_Num = b.Num
 group by b.name
 having count(a.title) >= 2;
-
 
 # (i)번
 select c.name
