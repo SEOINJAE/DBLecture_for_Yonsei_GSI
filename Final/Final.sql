@@ -110,7 +110,7 @@ where Length >= 115;
 select b.Name
 	, b.Address
 from Movie as a
-	left join Producer as b on a.producer_num = b.num
+	inner join Producer as b on a.producer_num = b.num
 where a.Year = 1990
 and a.Studio_name = 'Disney Studio';
 
